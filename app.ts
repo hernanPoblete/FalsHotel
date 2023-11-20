@@ -8,7 +8,6 @@ dotenv.config({
 const app = express();
 const port = process.env.PORT;
 const debug = parseInt(process.env.DEBUG||"0");
-console.log(debug)
 
 app.set('view-engine', require('ejs'));
 app.use(urlencoded({extended:false}));
