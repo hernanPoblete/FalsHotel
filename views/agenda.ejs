@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include("./partials/headinfo.ejs")%>
+</head>
+<body>
+    <%-include("./partials/header.ejs")%>
+
+    <div class="form-handler">
+        <h1>Agenda tu visita!</h1>
+        <form action="reserva/now" method="post">
+            <input type="text" name="name" placeholder="Nombre" id="">
+            <input type="submit" value="¡Reserva ya!">
+        </form>
+    </div>
+</body>
+</html>
