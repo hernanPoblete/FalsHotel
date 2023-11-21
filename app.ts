@@ -16,7 +16,10 @@ app.use(express.static("public"));
 app.use("/", require("./router/index.js"));
 app.use("/agenda", require("./router/agenda.js"))
 if(debug){
+    const events = require("events");
     app.use("/debug", require("./router/debug/debug.js"));
+
+    
 }
 
 

@@ -10,28 +10,27 @@ datasource db {
 model PAYMENT_TYPES {
   TYPE         Int            @id @default(autoincrement())
   DEFINITION   String?        @db.VarChar(255)
-  RESERVATIONS RESERVATIONS[] @ignore
+  RESERVATIONS RESERVATIONS[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model RESERVATIONS {
   ROOM          Int?
   DATE_START    DateTime?      @db.Date
   DATE_END      DateTime?      @db.Date
   PAYED         Boolean?       @default(false)
-  PAYMENT_TYPE  Int?           @default(0)
+  PAYMENT_TYPE  Int?           @default(1)
+  CODE          String         @id @unique(map: "CODE") @db.VarChar(6)
   ROOMS         ROOMS?         @relation(fields: [ROOM], references: [NUM], onDelete: NoAction, onUpdate: NoAction, map: "RESERVATIONS_ibfk_1")
   PAYMENT_TYPES PAYMENT_TYPES? @relation(fields: [PAYMENT_TYPE], references: [TYPE], onDelete: NoAction, onUpdate: NoAction, map: "RESERVATIONS_ibfk_2")
 
   @@index([PAYMENT_TYPE], map: "PAYMENT_TYPE")
   @@index([ROOM], map: "ROOM")
-  @@ignore
 }
 
 model ROOMS {
   NUM          Int            @id @default(autoincrement())
   TYPE         Int
-  RESERVATIONS RESERVATIONS[] @ignore
+  RESERVATIONS RESERVATIONS[]
 }
 
 model ROOM_TYPES {
